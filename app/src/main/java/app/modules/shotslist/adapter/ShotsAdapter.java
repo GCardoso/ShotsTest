@@ -56,8 +56,12 @@ public class ShotsAdapter extends RecyclerView.Adapter<ShotsAdapter.ViewHolder> 
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Shot actualShot = shots.get(position);
 
-        Uri uri = Uri.parse(actualShot.getImages().getHidpi());
-        holder.image.setImageURI(uri);
+        try {
+            Uri uri = Uri.parse(actualShot.getImages().getHidpi());
+            holder.image.setImageURI(uri);
+        } catch (NullPointerException npe) {
+            npe.printStackTrace();
+        }
 
         holder.title.setText(actualShot.getTitle());
         holder.createdAt.setText(actualShot.getFormattedCreatedDate());
