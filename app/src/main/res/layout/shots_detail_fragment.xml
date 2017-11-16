@@ -1,7 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:isScrollContainer="true"
+    android:nestedScrollingEnabled="true"
+    android:scrollIndicators="right">
+
+    <TextView
+        android:id="@+id/shot_detail_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/shot_detail_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/shot_detail_image"
+        android:layout_width="0dp"
+        android:layout_height="240dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/shot_detail_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/shot_detail_title"/>
+
+    <TextView
+        android:id="@+id/shot_detail_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:textAlignment="textStart"
+        app:layout_constraintBottom_toTopOf="@+id/shot_detail_views_count"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/shot_detail_image"/>
+
+    <TextView
+        android:id="@+id/shot_detail_views_count"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:textAlignment="textEnd"
+        app:layout_constraintBottom_toTopOf="@+id/shot_detail_comments_count"/>
+
+    <TextView
+        android:id="@+id/shot_detail_comments_count"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:textAlignment="textEnd"
+        app:layout_constraintBottom_toTopOf="@+id/shot_detail_created_at"/>
+
+    <TextView
+        android:id="@+id/shot_detail_created_at"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:textAlignment="textEnd"/>
 
 </android.support.constraint.ConstraintLayout>

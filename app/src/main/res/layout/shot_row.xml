@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="120dp"
+    android:layout_height="110dp"
+    android:layout_margin="8dp"
     >
 
     <TextView
@@ -14,10 +15,11 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
+        android:text="Title"
         android:textAlignment="viewStart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/shot_row_image"
+        app:layout_constraintStart_toStartOf="@+id/shot_row_view_count"
         app:layout_constraintTop_toTopOf="@+id/shot_row_image"/>
 
     <com.facebook.drawee.view.SimpleDraweeView
@@ -39,7 +41,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        android:textAlignment="center"
+        android:text="ViewCount"
+        android:textAlignment="textEnd"
         app:layout_constraintBottom_toTopOf="@+id/shot_row_created_at"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -53,8 +56,9 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:textAlignment="center"
+        android:text="CreatedAt"
+        android:textAlignment="textEnd"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/shot_row_image"/>
+        app:layout_constraintStart_toStartOf="@+id/shot_row_view_count"/>
 </android.support.constraint.ConstraintLayout>
