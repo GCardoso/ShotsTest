@@ -7,10 +7,12 @@
     <application
         android:name="app.ShotsApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:replace="android:icon"
         android:theme="@style/AppTheme" >
         <activity android:name="app.modules.shotslist.ShotsListActivity" >
             <intent-filter>
@@ -19,6 +21,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="app.modules.shotdetails.ShotDetailsActivity"
+            android:parentActivityName="app.modules.shotslist.ShotsListActivity"></activity>
     </application>
 
 </manifest>
