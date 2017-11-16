@@ -28,20 +28,26 @@ public class ShotsListPresenter implements ShotsListContract.Actions {
     }
 
     @Override
-    public void loadShots() {
-        sCompositeDisposable.add(service.listShots()
-        .subscribeOn(Schedulers.newThread())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(new Consumer<List<Shot>>() {
-            @Override
-            public void accept(List<Shot> shots) throws Exception {
-                view.showShows(shots);
-            }
-        }));
+    public void onShotClicked(long id) {
+        view.showShotDetails(id);
     }
 
     @Override
-    public void onShotClicked(long id) {
-        view.showShotDetails(id);
+    public void fetchPage(int page) {
+        sCompositeDisposable.add(service.listShots(page)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<Shot>>() {
+                    @Override
+                    public void accept(List<Shot> shots) throws Exception {
+                        view.showShows(shots);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        throwable.printStackTrace();
+                        view.showError();
+                    }
+                }));
     }
 }

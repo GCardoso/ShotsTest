@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,7 +17,9 @@ import java.util.List;
 
 import app.modules.shotdetails.ShotDetailsActivity;
 import app.modules.shotslist.adapter.ShotsAdapter;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import domain.entities.Shot;
+import library.listeners.EndlessScrollListener;
 
 /**
  * Created by guilhermecardoso on 11/13/17.
@@ -49,6 +52,12 @@ public class ShotsListFragment extends Fragment implements ShotsListContract.Vie
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setOnScrollListener(new EndlessScrollListener(linearLayoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                presenter.fetchPage(page);
+            }
+        });
 
         adapter = new ShotsAdapter();
         adapter.setPresenter(presenter);
@@ -61,7 +70,7 @@ public class ShotsListFragment extends Fragment implements ShotsListContract.Vie
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if (presenter != null) {
-            presenter.loadShots();
+            presenter.fetchPage(1);
         }
     }
 
@@ -77,5 +86,16 @@ public class ShotsListFragment extends Fragment implements ShotsListContract.Vie
         Intent intent = new Intent(getActivity(), ShotDetailsActivity.class);
         intent.putExtra(ShotDetailsActivity.EXTRA_SHOT_ID, shot);
         startActivity(intent);
+    }
+
+    @Override
+    public void showError() {
+        FragmentActivity activity = getActivity();
+        if (activity != null) {
+            SweetAlertDialog dialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE);
+            dialog.setTitleText("Some error occurred");
+            dialog.setCancelable(true);
+            dialog.show();
+        }
     }
 }

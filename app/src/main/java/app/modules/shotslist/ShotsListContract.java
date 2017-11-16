@@ -13,10 +13,11 @@ public interface ShotsListContract {
     interface View {
         void showShows(List<Shot> shots);
         void showShotDetails(long shot);
+        void showError();
     }
 
     interface Actions {
-        void loadShots();
         void onShotClicked(long id);
+        void fetchPage(int page);
     }
 }
