@@ -1,6 +1,14 @@
 package domain.entities;
 
+import android.os.Build;
+import android.text.Html;
+import android.text.Spanned;
+
 import com.google.gson.annotations.SerializedName;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by guilhermecardoso on 11/12/17.
@@ -13,14 +21,16 @@ public class Shot {
     private String description;
     private int width;
     private int height;
-    @SerializedName("createdAt")
-    private int createdAt;
+    @SerializedName("created_at")
+    private String createdAt;
     @SerializedName("views_count")
     private int viewsCount;
-    @SerializedName("commentsCount")
+    @SerializedName("comments_count")
     private int commentsCount;
+    @SerializedName("images")
+    private ImageField images;
 
-    public Shot(long id, String title, String description, int width, int height, int created_at, int views_count, int comments_count) {
+    public Shot(long id, String title, String description, int width, int height, String created_at, int views_count, int comments_count, ImageField images) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -29,6 +39,7 @@ public class Shot {
         this.createdAt = created_at;
         this.viewsCount = views_count;
         this.commentsCount = comments_count;
+        this.images = images;
     }
 
     public long getId() {
@@ -71,11 +82,11 @@ public class Shot {
         this.height = height;
     }
 
-    public int getCreatedAt() {
+    public String getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(int createdAt) {
+    public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
 
@@ -93,5 +104,42 @@ public class Shot {
 
     public void setCommentsCount(int comments_count) {
         this.commentsCount = comments_count;
+    }
+
+    public ImageField getImages() {
+        return images;
+    }
+
+    public void setImages(ImageField images) {
+        this.images = images;
+    }
+
+    public String getFormattedViews() {
+        return String.valueOf(this.viewsCount) + " Views";
+    }
+
+    public String getFormattedCreatedDate() {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        Date createdAt;
+        try {
+            createdAt = format.parse(this.createdAt);
+
+            format = new SimpleDateFormat("MM/dd/yyyy 'at' HH:mm:ss");
+        } catch (ParseException e) {
+            createdAt = new Date();
+        }
+        return format.format(createdAt);
+    }
+
+    public String getFormattedCommentsCount() {
+        return String.valueOf(this.commentsCount) + " Comments";
+    }
+
+    public Spanned getFormattedDescription() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            return Html.fromHtml(this.description, Html.FROM_HTML_MODE_LEGACY);
+        } else {
+            return Html.fromHtml(this.description);
+        }
     }
 }

@@ -20,13 +20,9 @@ public class ServiceFactory {
 
     private static Retrofit retrofit = builder.build();
 
-//    public static <S> S createService(Class<S> serviceClass) {
-//        return createService(serviceClass, null);
-//    }
 
     public static <S> S createService(
             Class<S> serviceClass) {
-//        if (!TextUtils.isEmpty(authToken)) {
             AuthenticationInterceptor interceptor =
                     new AuthenticationInterceptor(ShotsAPIService.SERVICE_TOKEN);
 
@@ -40,7 +36,7 @@ public class ServiceFactory {
 
             builder.addCallAdapterFactory(RxJava2CallAdapterFactory.create());
             retrofit = builder.build();
-//        }
+
 
         return retrofit.create(serviceClass);
     }
