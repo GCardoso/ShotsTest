@@ -11,7 +11,7 @@ import domain.entities.Shot;
 public interface ShotsListContract {
 
     interface View {
-        void showShows(List<Shot> shots);
+        void showShots(List<Shot> shots);
         void showShotDetails(long shot);
         void showError();
     }

@@ -75,7 +75,7 @@ public class ShotsListFragment extends Fragment implements ShotsListContract.Vie
     }
 
     @Override
-    public void showShows(List<Shot> shots) {
+    public void showShots(List<Shot> shots) {
         for (Shot shot : shots) {
             this.adapter.add(shot);
         }

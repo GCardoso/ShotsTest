@@ -40,7 +40,7 @@ public class ShotsListPresenter implements ShotsListContract.Actions {
                 .subscribe(new Consumer<List<Shot>>() {
                     @Override
                     public void accept(List<Shot> shots) throws Exception {
-                        view.showShows(shots);
+                        view.showShots(shots);
                     }
                 }, new Consumer<Throwable>() {
                     @Override
