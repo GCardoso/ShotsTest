@@ -7,6 +7,7 @@ import io.reactivex.Observable;
 import io.reactivex.Single;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * Created by guilhermecardoso on 11/12/17.
@@ -21,4 +22,7 @@ public interface ShotsAPIService {
 
     @GET("shots/{id}")
     Single<Shot> getShot(@Path("id") long shotId);;
+
+    @GET("shots")
+    Observable<List<Shot>> listShots(@Query("page") int page);
 }
