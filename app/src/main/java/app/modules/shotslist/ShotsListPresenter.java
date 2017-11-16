@@ -1,7 +1,5 @@
 package app.modules.shotslist;
 
-import android.util.Log;
-
 import java.util.List;
 
 import domain.entities.Shot;
@@ -32,16 +30,18 @@ public class ShotsListPresenter implements ShotsListContract.Actions {
     @Override
     public void loadShots() {
         sCompositeDisposable.add(service.listShots()
-        .subscribeOn(Schedulers.io())
+        .subscribeOn(Schedulers.newThread())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new Consumer<List<Shot>>() {
             @Override
             public void accept(List<Shot> shots) throws Exception {
-                for(Shot actualShot : shots) {
-                    Log.i(TAG, actualShot.getTitle());
-                }
+                view.showShows(shots);
             }
         }));
     }
 
+    @Override
+    public void onShotClicked(long id) {
+        view.showShotDetails(id);
+    }
 }
