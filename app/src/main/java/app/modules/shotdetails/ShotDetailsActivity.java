@@ -7,6 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.guilhermecardoso.shotstest.R;
 
+import domain.network.ServiceFactory;
+import domain.network.ShotsAPIService;
+import io.reactivex.disposables.CompositeDisposable;
+
 /**
  * Created by guilhermecardoso on 11/14/17.
  */
@@ -33,7 +37,11 @@ public class ShotDetailsActivity extends AppCompatActivity {
 
         if (fragment == null && extras != null && extras.containsKey(EXTRA_SHOT_ID)) {
             fragment = ShotDetailsFragment.newInstance(extras.getLong(EXTRA_SHOT_ID));
-            ShotDetailsContract.Actions presenter = new ShotDetailsPresenter((ShotDetailsFragment) fragment);
+            ShotDetailsContract.Actions presenter = new ShotDetailsPresenter(
+                    (ShotDetailsFragment) fragment,
+                    new CompositeDisposable(),
+                    ServiceFactory.createService(ShotsAPIService.class)
+            );
             ((ShotDetailsFragment) fragment).setPresenter(presenter);
         }
 

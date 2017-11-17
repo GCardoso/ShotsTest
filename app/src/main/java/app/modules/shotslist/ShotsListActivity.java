@@ -7,6 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.guilhermecardoso.shotstest.R;
 
+import domain.network.ServiceFactory;
+import domain.network.ShotsAPIService;
+import io.reactivex.disposables.CompositeDisposable;
+
 public class ShotsListActivity extends AppCompatActivity {
 
     private static final String TAG = "ShotsListActivity";
@@ -27,7 +31,9 @@ public class ShotsListActivity extends AppCompatActivity {
 
         if (fragment == null) {
             fragment = ShotsListFragment.newInstance();
-            ShotsListPresenter presenter = new ShotsListPresenter((ShotsListFragment) fragment);
+            ShotsListPresenter presenter = new ShotsListPresenter((ShotsListFragment) fragment,
+                    new CompositeDisposable(),
+                    ServiceFactory.createService(ShotsAPIService.class));
             ((ShotsListFragment) fragment).setPresenter(presenter);
         }
 
