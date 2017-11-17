@@ -42,6 +42,10 @@ public class Shot {
         this.images = images;
     }
 
+    public Shot() {
+
+    }
+
     public long getId() {
         return id;
     }
