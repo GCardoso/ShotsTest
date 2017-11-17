@@ -3,7 +3,6 @@ package app.modules.shotslist;
 import java.util.List;
 
 import domain.entities.Shot;
-import domain.network.ServiceFactory;
 import domain.network.ShotsAPIService;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -21,10 +20,10 @@ public class ShotsListPresenter implements ShotsListContract.Actions {
     private CompositeDisposable sCompositeDisposable;
     private ShotsAPIService service;
 
-    public ShotsListPresenter(ShotsListContract.View view) {
+    public ShotsListPresenter(ShotsListContract.View view, CompositeDisposable compositeDisposable, ShotsAPIService service) {
         this.view = view;
-        sCompositeDisposable = new CompositeDisposable();
-        service = ServiceFactory.createService(ShotsAPIService.class);
+        sCompositeDisposable = compositeDisposable;
+        this.service = service;
     }
 
     @Override
@@ -49,5 +48,10 @@ public class ShotsListPresenter implements ShotsListContract.Actions {
                         view.showError();
                     }
                 }));
+    }
+
+    @Override
+    public void dispose() {
+        this.sCompositeDisposable.dispose();
     }
 }

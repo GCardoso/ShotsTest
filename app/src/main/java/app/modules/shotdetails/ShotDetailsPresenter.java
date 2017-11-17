@@ -1,7 +1,6 @@
 package app.modules.shotdetails;
 
 import domain.entities.Shot;
-import domain.network.ServiceFactory;
 import domain.network.ShotsAPIService;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -19,10 +18,10 @@ public class ShotDetailsPresenter implements ShotDetailsContract.Actions {
     private CompositeDisposable compositeDisposable;
     private ShotsAPIService service;
 
-    public ShotDetailsPresenter(ShotDetailsContract.View view) {
+    public ShotDetailsPresenter(ShotDetailsContract.View view, CompositeDisposable compositeDisposable, ShotsAPIService service) {
         this.view = view;
-        compositeDisposable = new CompositeDisposable();
-        service = ServiceFactory.createService(ShotsAPIService.class);
+        this.compositeDisposable = compositeDisposable;
+        this.service = service;
     }
 
 
@@ -46,5 +45,10 @@ public class ShotDetailsPresenter implements ShotDetailsContract.Actions {
                 view.showError();
             }
         }));
+    }
+
+    @Override
+    public void dispose() {
+        this.compositeDisposable.dispose();
     }
 }
