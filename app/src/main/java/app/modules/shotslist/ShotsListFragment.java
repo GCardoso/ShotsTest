@@ -98,4 +98,12 @@ public class ShotsListFragment extends Fragment implements ShotsListContract.Vie
             dialog.show();
         }
     }
+
+    @Override
+    public void onStop() {
+        if (presenter != null) {
+            presenter.dispose();
+        }
+        super.onStop();
+    }
 }

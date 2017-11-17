@@ -120,4 +120,10 @@ public class ShotDetailsFragment extends Fragment implements ShotDetailsContract
 
         }
     }
+
+    @Override
+    public void onStop() {
+        presenter.dispose();
+        super.onStop();
+    }
 }
