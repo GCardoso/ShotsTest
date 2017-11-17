@@ -1,5 +1,6 @@
 package app.modules.shotdetails;
 
+import app.BaseActions;
 import domain.entities.Shot;
 
 /**
@@ -15,7 +16,7 @@ public interface ShotDetailsContract {
         void showError();
     }
 
-    interface Actions {
+    interface Actions extends BaseActions {
         void loadShotDetails(long id);
 
     }

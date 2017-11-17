@@ -2,6 +2,7 @@ package app.modules.shotslist;
 
 import java.util.List;
 
+import app.BaseActions;
 import domain.entities.Shot;
 
 /**
@@ -16,7 +17,7 @@ public interface ShotsListContract {
         void showError();
     }
 
-    interface Actions {
+    interface Actions extends BaseActions {
         void onShotClicked(long id);
         void fetchPage(int page);
     }
